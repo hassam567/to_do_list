@@ -1,0 +1,134 @@
+/* TaskTitle.css */
+
+.CustomTextField-root {
+    & .MuiOutlinedInput-root {
+      border: 3px solid #e6e6e6;
+      outline: none;
+  
+      &:hover {
+        border: 3px solid orange;
+      }
+  
+      &.Mui-focused {
+        border: 3px solid red;
+      }
+  
+      & .MuiOutlinedInput-notchedOutline {
+        border: none; /* Remove default border */
+      }
+  
+      height: 50px;
+      width: 435px;
+      outline: none;
+ 
+      margin-bottom: 20px;
+      border-radius: 20px;
+   
+      
+  
+      & .MuiInputBase-input::placeholder {
+      
+        font-weight: bold;
+        color: black;
+        
+      }
+  
+     
+    }
+  }
+  /* .CustomTextField-root .MuiOutlinedInput-input {
+    padding: 11px;
+  }
+  
+  .CustomTextField-root .MuiOutlinedInput-input {
+    padding: 11px;
+  }
+  
+  .CustomTextField-root .MuiInputBase-input::placeholder {
+    padding: 11px;
+  }
+  
+  .CustomTextField-root.MuiOutlinedInput-multiline .MuiOutlinedInput-input {
+    padding: 11px;
+    margin: 10px 0;
+  }
+  
+  
+   */
+  
+  
+  
+
+
+
+
+
+/* CustomDropdown.css */
+
+.CustomDropdown-root {
+    height: 50px;
+    border-radius: 20px;
+    width: 200px;
+    padding-left: 10px;
+    background-color: #fff;
+    outline: none;
+    margin-top: 10px;
+    font-weight: bold;
+    border: 3px solid #e6e6e6;
+
+    &:hover {
+        border: 3px solid orange;
+    }
+
+    &.Mui-focused {
+        border: 3px solid red;
+    }
+
+    & .MuiOutlinedInput-notchedOutline {
+        border: none; /* Remove default border */
+    }
+}
+
+
+
+.second_div{
+    margin-left: 50px
+}
+
+.fist_image
+{
+     height: 80px;
+     width: 80px;
+}
+
+.third_div{
+    margin-left: 50px
+}
+/* InputBox.css */
+
+/* Styles for larger screens */
+.d-flex {
+    display: flex;
+  }
+  
+  /* Styles for smaller screens */
+  @media (max-width: 768px) {
+    .d-flex {
+      flex-direction: column;
+    }
+    /* Add any other styles for smaller screens here */
+  }
+  
+.OuterDivboxes{
+   
+    width:435px; 
+    margin: auto;
+    margin-top: 30px;
+     
+}
+
+Button.customButton {
+    border-radius: 20px;
+    height: 50px;
+    width: 435px;
+  }
