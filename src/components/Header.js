@@ -5,12 +5,16 @@ import '../css/InputBox.css';
 
 const Header = ({backgroundColor, padding, fontFamily}) => {
   return (
-    <Box sx={{
+  
+    <Box
+      sx={{
         background: backgroundColor,
         padding,
         fontFamily,
-      }}>
-      <Box className="d-flex flex-row align-items-center second_div">
+        minWidth:"500px", 
+      }}
+    >
+      <Box className="d-flex flex-row align-items-center">
         <img src={MyImage} alt="Icon not found" className='fist_image' />
         <Box className='d-flex flex-column ml-2 third_div'>
           <Typography variant="h3" sx={{ marginBottom: 0 }}>
@@ -22,6 +26,7 @@ const Header = ({backgroundColor, padding, fontFamily}) => {
         </Box>
       </Box>
     </Box>
+ 
   );
 }
 

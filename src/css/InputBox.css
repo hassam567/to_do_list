@@ -4,6 +4,11 @@
     & .MuiOutlinedInput-root {
       border: 3px solid #e6e6e6;
       outline: none;
+      width: 435px; /* Use relative width for responsiveness */
+      @media (max-width: 497px) {
+        width: 200px; /* Set width to 100% for screens less than 435px */
+      }
+  
   
       &:hover {
         border: 3px solid orange;
@@ -18,7 +23,7 @@
       }
   
       height: 50px;
-      width: 435px;
+      
       outline: none;
  
       margin-bottom: 20px;
@@ -61,15 +66,23 @@
 
 
 
-
+   .CustomDropdownContainer {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+  }
 
 /* CustomDropdown.css */
 
 .CustomDropdown-root {
     height: 50px;
     border-radius: 20px;
-    width: 200px;
-    padding-left: 10px;
+    width:  200px; /* Use relative width for responsiveness */
+    @media (max-width: 497px) {
+      
+      width: 200px; /* Set width to 100% for screens less than 435px */
+    }
+    
     background-color: #fff;
     outline: none;
     margin-top: 10px;
@@ -91,9 +104,7 @@
 
 
 
-.second_div{
-    margin-left: 50px
-}
+
 
 .fist_image
 {
@@ -107,28 +118,51 @@
 /* InputBox.css */
 
 /* Styles for larger screens */
-.d-flex {
+/* .d-flex {
     display: flex;
   }
+   */
+ 
   
-  /* Styles for smaller screens */
-  @media (max-width: 768px) {
-    .d-flex {
-      flex-direction: column;
+   .OuterDivboxes {
+    max-width: 435px;
+    padding-top: 40px;
+    margin: auto;
+    width: 100%;
+  
+   
+  }
+  .cardResponsiveNess
+  {
+    @media (max-width: 435px) {
+      margin-left: 20px;
+      margin-right: 20px;
     }
-    /* Add any other styles for smaller screens here */
   }
   
-.OuterDivboxes{
-   
-    width:435px; 
-    margin: auto;
-    margin-top: 30px;
-     
-}
+
+
+
 
 Button.customButton {
-    border-radius: 20px;
-    height: 50px;
-    width: 435px;
+  border-radius: 20px;
+  height: 50px;
+  width: 435px;
+
+  @media (max-width: 497px) {
+    width: 200px; /* Set width to 200px for screens less than 497px */
   }
+  
+  }
+
+  .allFieldsLeftMargin
+  {
+    @media (max-width: 497px) {
+      margin-left: 20px; /* Set width to 200px for screens less than 497px */
+    }
+  }
+
+  
+
+  
+  

@@ -18,6 +18,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CustomButton from './CustomButton';
+import { createTheme } from '@mui/material/styles';
 
 const FinalDisplay = () => {
   const [taskTitle, setTaskTitle] = useState('');
@@ -30,6 +31,7 @@ const FinalDisplay = () => {
   const [selectedTaskDetails, setSelectedTaskDetails] = useState(null);
 
   const [openCheckModal, setOpenCheckModal] = useState(false);
+  const theme = createTheme();
 
   const handleCheckIconClick = (task) => {
     setSelectedTaskDetails(task);
@@ -48,8 +50,14 @@ const FinalDisplay = () => {
     handleCheckModalClose();
   };
   const validationSchema = Yup.object({
-    taskTitle: Yup.string().required('Please enter task title'),
+    taskTitle: Yup.string()
+      .trim()
+      .required('Please enter task title')
+      .matches(/^[a-zA-Z0-9\s]+$/, 'Task title can only contain alphanumeric characters and spaces')
+      .min(3, 'Task title must be at least 3 characters long')
+    // .max(20, 'Task title cannot exceed 20 characters'),
   });
+
 
   const formik = useFormik({
     initialValues: {
@@ -132,7 +140,11 @@ const FinalDisplay = () => {
         fontFamily="Instrument, serif"
       />
 
-      <Box className='OuterDivboxes '>
+
+      <Box
+        className="OuterDivboxes allFieldsLeftMargin"
+
+      >
         <form onSubmit={formik.handleSubmit}>
           <Input
             updateTitle={(value) => {
@@ -142,11 +154,12 @@ const FinalDisplay = () => {
             placeholder="Enter Task Title"
             label="Task Title"
             style={{ width: '100%', marginBottom: '0px' }}
+            className='inputField'
           />
           {formik.touched.taskTitle && formik.errors.taskTitle ? (
             <div style={{ color: 'red', marginLeft: "20px", marginBottom: "20px", fontWeight: "bold", marginTop: "-20px" }}>{formik.errors.taskTitle}</div>
           ) : null}
-          <div className='d-flex flex-row justify-content-between ' style={{ width: '100%', marginBottom: '20px' }}>
+          <Box className=' CustomDropdownContainer ' style={{ marginBottom: '20px' }}>
             <DropDown
               label="Priority"
               value={formik.values.priority}
@@ -156,7 +169,7 @@ const FinalDisplay = () => {
                 { label: 'Medium', value: 'medium' },
                 { label: 'High', value: 'high' }
               ]}
-              style={{ width: '100%', }}
+
             />
 
             <DropDown
@@ -167,11 +180,13 @@ const FinalDisplay = () => {
                 { label: 'In Progress', value: 'In Progress' },
                 { label: 'Completed', value: 'completed' }
               ]}
-              style={{ width: '100%', }}
+
             />
 
 
-          </div>
+          </Box>
+
+
 
 
 
@@ -181,48 +196,81 @@ const FinalDisplay = () => {
             color="primary"
             type="submit"
             className='customButton'
-            style={{ width: '100%', marginBottom: '30px' }}
+            style={{ marginBottom: '30px' }}
             label="Add Task"
           >
-         
+
           </CustomButton>
+
 
         </form>
 
 
 
 
-      
 
 
 
-        {tasks.length > 0 && (
-  <Box className='card' sx={{ minHeight: "300px", width: "100%", maxWidth: "435px", background: "#E6E6E6", borderRadius: "10px", paddingLeft: "30px", paddingRight: "30px", marginBottom: "100px" }}>
-    {reversedTasks.map((task, index) => (
-      <Box key={index} className='card mb-2' sx={{ position: 'relative', width: "100%", background: task.status === 'Completed' ? '#D1FFBD' : "white", borderRadius: "10px", height: "65px", marginTop: index === 0 ? "20px" : "0" }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {task.status !== 'Completed' ? (
-            <CheckCircleOutlineIcon
-              style={{ color: "grey", cursor: 'pointer', position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }}
-              onClick={() => handleCheckIconClick(task)}
-            />
-          ) : (
-            <CheckCircleOutlineIcon
-              style={{ color: "grey", position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
-            />
-          )}
-          <Typography variant="body1" style={{ fontSize: '15px', marginTop: "20px", marginLeft: "40px", marginRight: "auto", fontWeight: 'bold' }}>
-            {task.title}
-          </Typography>
-          <VisibilityIcon style={{ color: "blue", cursor: 'pointer', position: 'absolute', right: '40px', top: '50%', transform: 'translateY(-50%)' }} onClick={() => handleDetailsClick(task)} />
-          
-            <DeleteIcon style={{ color: "red", cursor: 'pointer', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }} onClick={() => handleDeleteTask(tasks.length - 1 - index)} />
         
-        </Box>
-      </Box>
-    ))}
-  </Box>
-)}
+          {tasks.length > 0 && (
+            <Box className='card scrollable-content' sx={{
+              minHeight: "300px",
+              width: "100%",
+              maxWidth: "435px",
+              minWidth: "300px",
+              background: "#E6E6E6",
+              borderRadius: "10px",
+              paddingLeft: "30px",
+              paddingRight: "30px",
+              marginBottom: "100px",
+              maxHeight: reversedTasks.length > 3 ? '300px' : 'none',
+              overflowY: 'auto'
+            }}>
+              <Box sx={{}}>
+                {reversedTasks.map((task, index) => (
+                  <Box key={index} className='card mb-2' sx={{
+                    position: 'relative',
+                    width: "100%",
+                    background: task.status === 'Completed' ? '#D1FFBD' : "white",
+                    borderRadius: "10px",
+                    height: "65px",
+                    marginTop: index === 0 ? "20px" : "0",
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      {task.status !== 'Completed' ? (
+                        <CheckCircleOutlineIcon
+                          style={{ color: "grey", cursor: 'pointer', position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }}
+                          onClick={() => handleCheckIconClick(task)}
+                        />
+                      ) : (
+                        <CheckCircleOutlineIcon
+                          style={{ color: "grey", position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}
+                        />
+                      )}
+                      <Typography variant="body1" style={{
+                        fontSize: '15px',
+                        marginTop: "20px",
+                        marginLeft: "40px",
+                        marginRight: "auto",
+                        fontWeight: 'bold',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}>
+                        {task.title.length > 15 ? `${task.title.substring(0, 12)}...` : task.title}
+                      </Typography>
+                      <VisibilityIcon style={{ color: "blue", cursor: 'pointer', position: 'absolute', right: '40px', top: '50%', transform: 'translateY(-50%)' }} onClick={() => handleDetailsClick(task)} />
+                      <DeleteIcon style={{ color: "red", cursor: 'pointer', position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }} onClick={() => handleDeleteTask(tasks.length - 1 - index)} />
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          )}
+    
 
 
         <Dialogs
@@ -237,9 +285,9 @@ const FinalDisplay = () => {
         <Dialogs
           open={openDetailsModal}
           handleClose={handleDetailsModalClose}
-         
+
           title="Task Details"
-          buttonText="Click to hide the detail modal" 
+          buttonText="Click to hide the detail modal"
           description={
             selectedTaskDetails && (
               <>
